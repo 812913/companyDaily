@@ -1,4 +1,5 @@
-推荐的两种方式：  
+推荐的三种方式：  
+（1）
 
     class DankButton extends React.Component {
         constructor() {
@@ -20,7 +21,9 @@
         }
     }
 
-在构造函数中绑定回调上下文，构造函数只调用一次  
+在构造函数中绑定回调上下文，构造函数只调用一次 
+
+（2） 
 
      class DankButton extends React.Component {
         constructor() {
@@ -38,6 +41,21 @@
         logPhrase() {
             console.log('such gnawledge')
         }
+    }
+
+（3）
+
+    function ItemList(props) {
+        return (
+            <ul>
+            {props.items.map((item, index) => (
+                <Item
+                key={item.key}
+                onClick={() => doSomethingWith(item.name, index)}
+                />
+            ))}
+            </ul>
+        );
     }
 
 不推荐的方式：     
