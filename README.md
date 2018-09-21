@@ -10,6 +10,7 @@
 * [Echarts常见问题](./分类整理/Echarts常见问题/_index.md)   
 * [ES6的使用](./分类整理/ES6的使用/_index.md)  
 * [Git](./分类整理/Git/_index.md)
+* [jQuery源码学习](./分类整理/jQuery源码学习/_index.md)
 * [lodash的学习及使用](./分类整理/lodash的学习及使用/_index.md)
 * [mobx](./分类整理/mobx/_index.md)
 * [Mocha](./分类整理/Mocha/_index.md)

@@ -80,7 +80,8 @@
    1. 旋转  
    2. 类目隔一个加换行  
    3. 加滚动条  
-   4. 设置interval，隔几个显示一个 
+   4. 设置interval，隔几个显示一个
+   5. 自定义label的样式，根据数组的大小确定应该截断的长度 
 
 类目全部显示，根据数据长度判断是否旋转： 
 
@@ -127,6 +128,27 @@
             },
          ],
 
+自定义label的样式：   
+
+        axisLabel: {
+                interval: 0,
+                show: true,
+                showMinLabel: true,
+                agile: 'right',
+                textStyle: {
+                color: 'rgba(0,0,0,0.65)',
+                },
+                formatter(value, index) {
+                if (chartDataOrigin.length >= 7) {
+                    return value.length > 5 ? `${value.slice(0, 5)}...` : value;
+                }
+                if (chartDataOrigin.length >= 10) {
+                    return value.length > 3 ? `${value.slice(0, 3)}...` : value;
+                }
+                return value.length > 7 ? `${value.slice(0, 7)}...` : value;
+                }
+            }
+
 参考：   
 （1）[旋转、隔一个换行](https://blog.csdn.net/kebi007/article/details/68488694/)
 
@@ -152,6 +174,21 @@
 ## 如何修改图标类似padding的内边距  
 对于饼图等，通过调整center、width、heigth、radius来调整其圆心和大小，  
 对于直角坐标系，通过调整grid的top、right、bottom、left来调整   
-
 此外，通过echarts容器的margin也可以调整图表和其他内容的相对位置    
 
+## 如何自定义ToolTip的样式  
+ToolTip的formatter竟然可以写入标签并定义样式: 
+
+            toolTip:{
+            formatter(params) {
+            params[0].name = _.trim(params[0].name, '\n\n');
+            const sprint = chartDataOrigin.filter(item => item.name === params[0].name)[0];
+            let res = `<span style="color: #3F51B5">${params[0].name}</span>`;
+            res += `<span style="display:block; margin-top: 0px; margin-bottom: 2px; color: rgba(0,0,0,0.54); font-size: 11px;">${sprint.startDate && sprint.startDate.split(' ')[0].split('-').join('/')}-${sprint.endDate && sprint.endDate.split(' ')[0].split('-').join('/')}</span>`;
+            res += `本迭代开始时故事点数：${sprint.start}`;
+            res += `<br/>工作已完成: ${(params[1].value === '-' ? 0 : params[1].value) + (params[4].value === '-' ? 0 : params[4].value)}`;
+            res += `<br/>工作增加: ${sprint.add}`;
+            res += `<br/>本迭代结束时剩余故事点数: ${(params[2].value === '-' ? 0 : params[2].value) + (params[3].value === '-' ? 0 : params[3].value)}`;
+            return res;
+            },
+        }
