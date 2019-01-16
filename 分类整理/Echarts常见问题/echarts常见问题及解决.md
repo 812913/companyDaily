@@ -171,7 +171,7 @@
             }],
         },   
 
-## 如何修改图标类似padding的内边距  
+## 如何修改图表类似padding的内边距  
 对于饼图等，通过调整center、width、heigth、radius来调整其圆心和大小，  
 对于直角坐标系，通过调整grid的top、right、bottom、left来调整   
 此外，通过echarts容器的margin也可以调整图表和其他内容的相对位置    

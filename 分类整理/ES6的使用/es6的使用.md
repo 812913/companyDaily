@@ -24,7 +24,7 @@
 
 ### arr.find  || arr.findIndex
 
-    const todo = statusArr.find(v => v.categoryCode === 'todo)  
+    const todo = statusArr.find(v => v.categoryCode === 'todo')  
 
 ### Array.from
 
